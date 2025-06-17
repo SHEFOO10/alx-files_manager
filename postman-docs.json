@@ -1,0 +1,404 @@
+{
+	"info": {
+		"_postman_id": "b996287e-d55b-4c2f-9c8c-a6a79295052e",
+		"name": "Files Manager",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23024573"
+	},
+	"item": [
+		{
+			"name": "connect",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "toto1234!",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "bob@dylan.com",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/connect",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"connect"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "valid token for 24 h",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/connect",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"connect"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "48"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"30-a+nnoaJB0/Z6fYNFG4EE2kweAeE\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 04 Aug 2024 16:21:18 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"token\": \"9a301973-bd36-45a7-9ac3-7b23fb45c1d8\"\n}"
+				}
+			]
+		},
+		{
+			"name": "users/me",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-token",
+						"value": "9a301973-bd36-45a7-9ac3-7b23fb45c1d8",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:5000/users/me",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"users",
+						"me"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "new file",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"name\": \"myText.txt\", \"type\": \"file\", \"data\": \"SGVsbG8gV2Vic3RhY2shCg==\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://verbose-space-goldfish-jvx6576q4xq3599v-5000.app.github.dev/files",
+					"protocol": "https",
+					"host": [
+						"verbose-space-goldfish-jvx6576q4xq3599v-5000",
+						"app",
+						"github",
+						"dev"
+					],
+					"path": [
+						"files"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "new folder",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"name\": \"uploads\", \"type\": \"folder\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/files",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"files"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list files",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-Token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:5000/files?parentId=66ae9ee38fd3793cb6dc4769&page=0",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"files"
+					],
+					"query": [
+						{
+							"key": "parentId",
+							"value": "66ae9ee38fd3793cb6dc4769"
+						},
+						{
+							"key": "page",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get file",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-Token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:5000/files/66afb3429956f4386184913d",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"files",
+						"66afb3429956f4386184913d"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Publish file",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X-Token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:5000/files/:id/publish",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"files",
+						":id",
+						"publish"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "66afb3429956f4386184913d"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Unpublish file",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X-Token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:5000/files/:id/unpublish",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"files",
+						":id",
+						"unpublish"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "66afb3429956f4386184913d"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get file data",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-Token",
+						"value": "{{token}}",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "localhost:5000/files/:id/data",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"files",
+						":id",
+						"data"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "66afb3429956f4386184913d"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"email\": \"bob@dylan.com\", \"password\": \"toto1234!\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://verbose-space-goldfish-jvx6576q4xq3599v-5000.app.github.dev/users",
+					"protocol": "https",
+					"host": [
+						"verbose-space-goldfish-jvx6576q4xq3599v-5000",
+						"app",
+						"github",
+						"dev"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": "4c3434f3-444c-4932-b2b4-8039a6be7881"
+		}
+	]
+}
